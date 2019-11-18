@@ -1,6 +1,3 @@
-# As funções neste arquivo dependem do seguinte pacote:
-# install.packages('caret')
-
 obter_melhor_knn = function (df, kinicial, kpasso) {
     df = subset(df, select=-c(os, preco))
     tamanho = floor(0.9 * nrow(df))
@@ -31,7 +28,7 @@ obter_melhor_knn = function (df, kinicial, kpasso) {
         }
 
         cm = caret::confusionMatrix(predicao, rotulos_teste)
-        acc = as.double(cm[['overall']])
+        acc = as.double(cm[['overall']][1])
 
         if (acc > best_acc) {
             best_acc = acc
