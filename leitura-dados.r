@@ -1,5 +1,5 @@
 obter_medida_numerica = function (coluna, sufixo) {
-    padrao = paste('(\\d+(?:\\.\\d+)?)\\s', sufixo, sep='')
+    padrao = paste("(\\d+(?:\\.\\d+)?)\\s", sufixo, sep="")
 
     coluna = regmatches(coluna, regexec(padrao, coluna))
 
@@ -14,8 +14,8 @@ converter_de_memoria = function (coluna) {
     coluna = trimws(coluna)
     coluna = tolower(coluna)
 
-    col_mb = obter_medida_numerica(coluna, 'mb')
-    col_gb = obter_medida_numerica(coluna, 'gb')
+    col_mb = obter_medida_numerica(coluna, "mb")
+    col_gb = obter_medida_numerica(coluna, "gb")
 
     col_gb = as.double(col_gb) * 1024
 
@@ -28,7 +28,7 @@ converter_de_memoria = function (coluna) {
 
 converter_de_camera = function (coluna, na_vira_0) {
     coluna = tolower(coluna)
-    coluna = obter_medida_numerica(coluna, 'mp')
+    coluna = obter_medida_numerica(coluna, "mp")
 
     if (na_vira_0) {
         coluna[is.na(coluna)] = 0
@@ -53,14 +53,14 @@ converter_de_os = function (coluna) {
 
 converter_de_tela = function (coluna) {
     coluna = tolower(coluna)
-    coluna = obter_medida_numerica(coluna, 'inches')
+    coluna = obter_medida_numerica(coluna, "inches")
 
     return (coluna)
 }
 
 converter_de_preco = function (coluna) {
     coluna = tolower(coluna)
-    coluna = regmatches(coluna, gregexpr('\\d+(?:\\.\\d+)?', coluna))
+    coluna = regmatches(coluna, gregexpr("\\d+(?:\\.\\d+)?", coluna))
     coluna = as.double(coluna)
     coluna[coluna > 5000] = NA
 
@@ -68,7 +68,7 @@ converter_de_preco = function (coluna) {
 }
 
 carregar_dataframe = function (caminho) {
-    df = read.csv(file=caminho, header=TRUE, sep=',')
+    df = read.csv(file=caminho, header=TRUE, sep=",")
 
     df[["hd"]] = converter_de_memoria(df[["internal_memory"]])
     df[["ram"]] = converter_de_memoria(df[["RAM"]])
@@ -80,7 +80,7 @@ carregar_dataframe = function (caminho) {
 
     df = df[c("hd", "ram", "pcamera", "scamera", "tela", "os", "preco")]
 
-    df[['ram']][df[['ram']] > 50000] = NA
+    df[["ram"]][df[["ram"]] > 50000] = NA
 
     df = na.omit(df)
 

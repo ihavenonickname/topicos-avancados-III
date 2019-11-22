@@ -1,7 +1,7 @@
-if (!require('caret')) {
-    install.packages('caret')
+if (!require("caret")) {
+    install.packages("caret")
 }
 
-if (!require('corrplot')) {
-    install.packages('corrplot')
+if (!require("corrplot")) {
+    install.packages("corrplot")
 }
