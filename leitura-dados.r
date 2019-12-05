@@ -87,7 +87,7 @@ carregar_dataframe = function (caminho) {
     df[["categoria"]] = as.factor(cut(
         df[["preco"]],
         breaks=c(0, 100, 250, 500, 1400),
-        labels=c("E", "C", "B", "A")
+        labels=c("D", "C", "B", "A")
     ))
 
     return (df)
